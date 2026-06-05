@@ -1,36 +1,265 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Learning Notes
 
-## Getting Started
+## Topics Covered
 
-First, run the development server:
+### 1. What is Next.js?
+
+* Next.js is a React framework used to build full-stack web applications.
+* It provides features like routing, server-side rendering, API routes, optimization, and better performance.
+* Built on top of React, making development faster and more structured.
+
+---
+
+### 2. SSR (Server-Side Rendering)
+
+* SSR means HTML is generated on the server before being sent to the browser.
+* Benefits:
+
+  * Faster initial page load
+  * Better SEO
+  * Improved performance for dynamic content
+
+---
+
+### 3. Creating a Next.js Project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx create-next-app@latest my-app
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* `my-app` is the project name.
+* Similar to Vite's project creation process.
 
-You can start editing the page by modifying `app/page.jsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. App Router vs Pages Router
 
-## Learn More
+#### Pages Router
 
-To learn more about Next.js, take a look at the following resources:
+* Uses the `pages` folder.
+* Older routing system.
+* Limited layout management.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### App Router
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* Uses the `app` folder.
+* Recommended for modern Next.js projects.
+* Supports:
 
-## Deploy on Vercel
+  * Nested layouts
+  * Server Components
+  * Loading UI
+  * Error handling
+  * Better folder organization
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Example:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+app/
+ ├─ page.js
+ ├─ layout.js
+ ├─ loading.js
+ └─ error.js
+```
+
+---
+
+### 5. File-Based Routing
+
+Routes are created automatically based on folder structure.
+
+Example:
+
+```bash
+app/
+ ├─ page.js          → /
+ ├─ about/
+ │   └─ page.js      → /about
+ └─ contact/
+     └─ page.js      → /contact
+```
+
+No need to configure routes manually.
+
+---
+
+### 6. Layouts
+
+Used for shared UI across multiple pages.
+
+Example:
+
+```jsx
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <Navbar />
+        {children}
+      </body>
+    </html>
+  );
+}
+```
+
+Benefits:
+
+* Reusable Navbar
+* Reusable Footer
+* Consistent design
+
+---
+
+### 7. Important App Router Files
+
+#### page.js
+
+Creates a route/page.
+
+#### layout.js
+
+Shared UI between pages.
+
+#### loading.js
+
+Displays loading UI while content loads.
+
+#### error.js
+
+Displays custom error UI.
+
+#### not-found.js
+
+Displays custom 404 page.
+
+#### route.js
+
+Used for creating API endpoints.
+
+---
+
+### 8. Catch-All Routes
+
+Example:
+
+```bash
+app/shop/[...slug]/page.js
+```
+
+Matches:
+
+```bash
+/shop/clothes
+/shop/clothes/shirts
+/shop/clothes/shirts/nike
+```
+
+The same page handles all these routes.
+
+Example slug values:
+
+```js
+["clothes"]
+["clothes", "shirts"]
+["clothes", "shirts", "nike"]
+```
+
+---
+
+### 9. Linting
+
+Linting is the process of checking code for:
+
+* Errors
+* Bad practices
+* Formatting issues
+
+Popular tools:
+
+* ESLint
+* Biome
+
+Benefits:
+
+* Cleaner code
+* Fewer bugs
+* Consistent style
+
+---
+
+### 10. Next.js Development Server
+
+Example output:
+
+```bash
+Local:   http://localhost:3000
+Network: http://192.168.1.94:3000
+```
+
+#### Local
+
+Accessible only on your own computer.
+
+#### Network
+
+Accessible by other devices on the same Wi-Fi network.
+
+---
+
+### 11. API Fetching Concepts
+
+#### External API
+
+Example:
+
+* News API
+* Weather API
+
+Application fetches data from third-party services.
+
+#### Backend API
+
+Created by developers using:
+
+* Node.js
+* Express
+* Django
+* Laravel
+
+Frontend communicates with backend APIs to retrieve or store data.
+
+---
+
+### 12. Project Idea Selected
+
+#### News Website
+
+Features:
+
+* Display latest news
+* Search news articles
+* Category filtering
+* Responsive design
+* API integration
+
+Concepts Practiced:
+
+* App Router
+* Routing
+* Layouts
+* API Fetching
+* Components
+* Loading States
+* Error Handling
+
+---
+
+## Key Takeaways
+
+* Next.js is a powerful React framework.
+* App Router is the modern routing system.
+* Routing is folder-based.
+* Layouts make UI reusable.
+* Loading and error states are built into the framework.
+* APIs are essential for fetching dynamic data.
+* Building projects is the best way to learn Next.js.
