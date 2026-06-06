@@ -263,3 +263,104 @@ Concepts Practiced:
 * Loading and error states are built into the framework.
 * APIs are essential for fetching dynamic data.
 * Building projects is the best way to learn Next.js.
+
+
+## Route Groups in Next.js
+
+Route Groups allow developers to organize routes inside the `app` directory without affecting the URL structure. A route group is created by wrapping a folder name in parentheses.
+
+### Syntax
+
+```text
+app/
+├── (marketing)/
+├── (dashboard)/
+```
+
+The folder names inside parentheses are ignored when generating URLs.
+
+### Example
+
+```text
+app/
+├── (marketing)/
+│   ├── about/
+│   │   └── page.jsx
+│   └── contact/
+│       └── page.jsx
+│
+├── (dashboard)/
+│   ├── profile/
+│   │   └── page.jsx
+│   └── settings/
+│       └── page.jsx
+```
+
+Generated URLs:
+
+```text
+/about
+/contact
+/profile
+/settings
+```
+
+The route group names `(marketing)` and `(dashboard)` do not appear in the URL.
+
+### Why Use Route Groups?
+
+#### 1. Better Project Organization
+
+Route groups help keep large applications organized by grouping related routes together.
+
+```text
+app/
+├── (marketing)/
+│   ├── about/
+│   └── contact/
+├── (store)/
+│   ├── products/
+│   ├── cart/
+│   └── checkout/
+```
+
+#### 2. Different Layouts for Different Sections
+
+Each route group can have its own layout.
+
+```text
+app/
+├── (public)/
+│   ├── layout.jsx
+│   └── about/page.jsx
+│
+├── (dashboard)/
+│   ├── layout.jsx
+│   └── profile/page.jsx
+```
+
+This allows different parts of the application to share different navigation bars, sidebars, footers, or other UI components.
+
+### Important Rule
+
+Route groups cannot generate duplicate URLs.
+
+```text
+app/
+├── (group1)/about/page.jsx
+├── (group2)/about/page.jsx
+```
+
+Both routes would create:
+
+```text
+/about
+```
+
+This causes a routing conflict and Next.js will throw an error.
+
+### Key Point
+
+Route Groups are used for organization and layout management only. They help developers structure large applications while keeping URLs clean and user-friendly.
+
+
